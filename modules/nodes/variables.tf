@@ -3,7 +3,7 @@ variable "master_node_instance_type" {
 }
 
 variable "master_node_ami" {
-  default = "ami-0910ce22fbfa68e1d"
+  default = "ami-0e872aee57663ae2d"
 }
 
 variable "main_vpc_id" {
