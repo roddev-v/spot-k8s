@@ -44,3 +44,8 @@ resource "aws_route_table" "public_routing_table" {
     Name = "spot-k8s - Routing table to public internet"
   }
 }
+
+resource "aws_route_table_association" "public_subnet_gateway_association" {
+  subnet_id = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.public_routing_table.id
+}
