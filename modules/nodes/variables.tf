@@ -7,6 +7,11 @@ variable "main_vpc_id" {
   description = "Main spot k8s VPC id"
 }
 
+variable "main_vpc_cidr" {
+  type = string
+  description = "Main VPC CIDR block"
+}
+
 variable "public_subnet_id" {
   type = string
   description = "Public subnet id"

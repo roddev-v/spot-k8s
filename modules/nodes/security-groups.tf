@@ -42,31 +42,15 @@ resource "aws_security_group" "spot_k8s_master" {
     from_port   = 2379
     to_port     = 2380
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.main_vpc_cidr]
   }
 
   ingress {
-    description = "Kubelet API"
+    description = "Kubelet API, kube-scheduler, kube-controller-manager"
     from_port   = 10250
-    to_port     = 10250
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "kube-scheduler"
-    from_port   = 10259
     to_port     = 10259
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "kube-controller-manager"
-    from_port   = 10257
-    to_port     = 10257
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.main_vpc_cidr]
   }
 
   egress {
