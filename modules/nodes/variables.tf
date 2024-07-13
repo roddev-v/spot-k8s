@@ -1,9 +1,5 @@
 variable "master_node_instance_type" {
-  default = "t3.micro"
-}
-
-variable "master_node_ami" {
-  default = "ami-0e872aee57663ae2d"
+  default = "t3.medium"
 }
 
 variable "main_vpc_id" {
