@@ -5,8 +5,11 @@ resource "aws_instance" "master_node" {
   subnet_id                   = var.public_subnet_id
   vpc_security_group_ids      = [aws_security_group.ssh_access.id, aws_security_group.spot_k8s_master.id]
 
+  root_block_device {
+    volume_size = var.master_node_ebs_size
+  }
+
   tags = {
     Name = "spot k8s - Master node"
   }
 }
-

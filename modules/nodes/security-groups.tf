@@ -38,6 +38,14 @@ resource "aws_security_group" "spot_k8s_master" {
   }
 
   ingress {
+    description = "Kubernetes API Server"
+    from_port   = 16443
+    to_port     = 16443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description = "etcd server client API"
     from_port   = 2379
     to_port     = 2380
