@@ -1,11 +1,8 @@
-variable "master_node_instance_type" {
-  default = "t3.medium"
-}
-
 variable "ubuntu_24_04_lts_ami" {
   default = "ami-0e872aee57663ae2d"
 }
 
+# Networking
 variable "main_vpc_id" {
   type        = string
   description = "Main spot k8s VPC id"
@@ -26,21 +23,29 @@ variable "private_subnet_id" {
   description = "Private subnet id"
 }
 
+# Master node
+variable "master_node_instance_type" {
+  type        = string
+  description = "Master node instance type"
+}
+
 variable "master_node_ebs_size" {
   type        = number
   description = "Master node EBS storage ref"
 }
 
-variable "worker_node_instance_type" {
-  default = "t3.micro"
+# Worker nodes (permanent worker nodes)
+variable "on_demand_worker_node_instance_type" {
+  type        = string
+  description = "On-demand worker node instance type"
 }
 
-variable "worker_node_count" {
-  type    = number
-  default = 2
-}
-
-variable "worker_node_ebs_size" {
+variable "on_demand_worker_nodes_count" {
   type        = number
-  description = "Worker node EBS storage ref"
+  description = "On-demand worker nodes count"
+}
+
+variable "on_demand_worker_node_ebs_size" {
+  type        = number
+  description = "On-demand worker node EBS storage ref"
 }
