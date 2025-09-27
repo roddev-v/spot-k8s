@@ -1,22 +1,13 @@
 module "networking" {
   source = "./modules/networking"
+  az_0   = var.az_0
+  az_1   = var.az_1
 }
 
-module "nodes" {
-  source = "./modules/nodes"
+module "public-alb" {
+  source = "./modules/public-alb"
 
-  # networking
-  main_vpc_id       = module.networking.main_vpc_id
-  main_vpc_cidr     = module.networking.main_vpc_cidr
-  public_subnet_id  = module.networking.public_subnet_id
-  private_subnet_id = module.networking.private_subner_id
-
-  # storage
-  master_node_ebs_size           = var.master_node_ebs_size
-  on_demand_worker_node_ebs_size = var.master_node_ebs_size
-
-  # node configuration
-  master_node_instance_type           = var.master_node_instance_type
-  on_demand_worker_node_instance_type = var.on_demand_worker_node_instance_type
-  on_demand_worker_nodes_count        = var.on_demand_worker_nodes_count
+  main_vpc_id        = module.networking.main_vpc_id
+  public_subnet_0_id = module.networking.public_subnet_0_id
+  public_subnet_1_id = module.networking.public_subnet_1_id
 }
