@@ -24,7 +24,7 @@ resource "aws_lb_target_group_attachment" "spot_k8s_target_group_attachment" {
 
 resource "aws_lb_listener" "spot_k8s_api_listener" {
   load_balancer_arn = aws_lb.spot_k8s_public_nlb.arn
-  port              = 6443
+  port              = 80
   protocol          = "TCP"
 
   default_action {
