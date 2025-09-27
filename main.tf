@@ -11,3 +11,10 @@ module "public-alb" {
   public_subnet_0_id = module.networking.public_subnet_0_id
   public_subnet_1_id = module.networking.public_subnet_1_id
 }
+
+module "compute" {
+  source = "./modules/compute"
+
+  main_vpc_id       = module.networking.main_vpc_id
+  private_subnet_id = module.networking.private_subner_id
+}
