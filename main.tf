@@ -4,17 +4,21 @@ module "networking" {
   az_1   = var.az_1
 }
 
-module "public-alb" {
-  source = "./modules/public-alb"
-
-  main_vpc_id        = module.networking.main_vpc_id
-  public_subnet_0_id = module.networking.public_subnet_0_id
-  public_subnet_1_id = module.networking.public_subnet_1_id
-}
-
 module "compute" {
   source = "./modules/compute"
 
   main_vpc_id       = module.networking.main_vpc_id
   private_subnet_id = module.networking.private_subner_id
 }
+
+module "public-alb" {
+  source = "./modules/public-alb"
+
+  main_vpc_id        = module.networking.main_vpc_id
+  public_subnet_0_id = module.networking.public_subnet_0_id
+  public_subnet_1_id = module.networking.public_subnet_1_id
+
+  permanent_node_ip = module.compute.permanent_node_ip
+}
+
+
