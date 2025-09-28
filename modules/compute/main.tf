@@ -7,4 +7,5 @@ module "compute" {
 
   permanent_node_ami           = var.permanent_node_ami
   permanent_node_instance_type = var.permanent_node_instance_type
+  allow_ssh_from_bastion_sg_id = var.allow_ssh_from_bastion_sg_id
 }

@@ -17,3 +17,7 @@ variable "permanent_node_instance_type" {
 variable "permanent_node_ami" {
   type = string
 }
+
+variable "allow_ssh_from_bastion_sg_id" {
+  type = string
+}
