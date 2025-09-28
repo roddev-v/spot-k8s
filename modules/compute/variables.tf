@@ -6,6 +6,10 @@ variable "private_subnet_id" {
   type = string
 }
 
+variable "main_vpc_cidr" {
+  type = string
+}
+
 variable "permanent_node_ami" {
   type    = string
   default = "ami-0444794b421ec32e4"

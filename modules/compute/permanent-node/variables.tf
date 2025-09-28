@@ -6,10 +6,14 @@ variable "private_subnet_id" {
   type = string
 }
 
+variable "main_vpc_cidr" {
+  type = string
+}
+
 variable "permanent_node_instance_type" {
-  type    = string
+  type = string
 }
 
 variable "permanent_node_ami" {
-  type    = string
+  type = string
 }

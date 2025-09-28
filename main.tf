@@ -9,6 +9,7 @@ module "compute" {
 
   main_vpc_id       = module.networking.main_vpc_id
   private_subnet_id = module.networking.private_subner_id
+  main_vpc_cidr     = module.networking.main_vpc_cidr
 }
 
 module "public-alb" {
