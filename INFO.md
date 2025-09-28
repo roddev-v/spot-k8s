@@ -2,3 +2,6 @@
 
 [] Extract the variables a user might edit
 [] Create security groups based on k3s required ports 
+
+[] Enable internet access to private subnet
+
