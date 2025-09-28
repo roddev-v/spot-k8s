@@ -3,16 +3,28 @@ resource "aws_instance" "permanent_node" {
   instance_type          = var.permanent_node_instance_type
   subnet_id              = var.private_subnet_id
   vpc_security_group_ids = [aws_security_group.private_node_sg.id, var.allow_ssh_from_bastion_sg_id]
+  key_name               = data.aws_key_pair.manual.key_name
 
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
-    yum install -y python3
+    yum install -y nc
     
-    # Ultra-simple HTTP server
-    nohup python3 -m http.server 6443 --bind 0.0.0.0 > /home/ec2-user/server.log 2>&1 &
+    # Create simple HTTP response
+    cat << 'EOM' > /home/ec2-user/response.txt
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 76
+
+{"message": "Hello World from K8s API Mock!", "status": "success", "port": 6443}
+EOM
+
+    # Start netcat HTTP server
+    while true; do
+      cat /home/ec2-user/response.txt | nc -l -p 6443
+    done &
     
-    echo "Simple HTTP server started on port 6443" > /home/ec2-user/startup.log
+    echo "Netcat HTTP server started on port 6443" > /home/ec2-user/startup.log
     sleep 2
     netstat -tlnp | grep 6443 >> /home/ec2-user/startup.log
   EOF
@@ -20,4 +32,8 @@ resource "aws_instance" "permanent_node" {
   tags = {
     Name = var.permament_node_tags.name
   }
+}
+
+data "aws_key_pair" "manual" {
+  key_name = "demo-pem-key"
 }

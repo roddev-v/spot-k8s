@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.bastion_security_gorup.id]
   associate_public_ip_address = true
+  key_name      = data.aws_key_pair.manual.key_name
 
   user_data = <<-EOF
     #!/bin/bash
@@ -18,4 +19,8 @@ resource "aws_instance" "bastion" {
     Name = var.bastion_tags.name,
     Description = var.bastion_tags.description
   }
+}
+
+data "aws_key_pair" "manual" {
+  key_name = "demo-pem-key"
 }
