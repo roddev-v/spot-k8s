@@ -3,8 +3,8 @@ resource "aws_security_group" "spot_k8s_public_alb_sg" {
   vpc_id = var.main_vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 6443
+    to_port     = 6443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # open to the world
   }
@@ -17,6 +17,6 @@ resource "aws_security_group" "spot_k8s_public_alb_sg" {
   }
 
   tags = {
-    Name = var.public_tags.alb_security_group
+    Name = var.public_tags.nlb_security_group
   }
 }

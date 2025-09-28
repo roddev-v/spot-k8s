@@ -13,7 +13,7 @@ module "compute" {
 }
 
 module "public-alb" {
-  source = "./modules/public-alb"
+  source = "./modules/public"
 
   main_vpc_id        = module.networking.main_vpc_id
   public_subnet_0_id = module.networking.public_subnet_0_id

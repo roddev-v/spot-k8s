@@ -1,15 +1,13 @@
 resource "aws_lb" "spot_k8s_public_nlb" {
-  name               = "spot-k8s-public-nlb"
   load_balancer_type = "network"
   subnets            = [var.public_subnet_0_id, var.public_subnet_1_id]
 
   tags = {
-    Name = var.public_tags.alb
+    Name = var.public_tags.nlb
   }
 }
 
 resource "aws_lb_target_group" "spot_k8s_target_group" {
-  name        = "k8s-api-tg"
   port        = 6443
   protocol    = "TCP"
   target_type = "ip"
@@ -24,6 +22,10 @@ resource "aws_lb_target_group" "spot_k8s_target_group" {
     interval            = 10
     port                = "6443"
     protocol            = "TCP"
+  }
+
+  tags = {
+    Name = var.public_tags.nlb_target_group
   }
 }
 
