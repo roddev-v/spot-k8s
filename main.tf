@@ -4,6 +4,13 @@ module "networking" {
   az_1   = var.az_1
 }
 
+module "bastion" {
+  source = "./modules/bastion"
+
+  subnet_id   = module.networking.public_subnet_0_id
+  main_vpc_id = module.networking.main_vpc_id
+}
+
 module "compute" {
   source = "./modules/compute"
 
